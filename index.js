@@ -31,7 +31,7 @@ document.getElementById("registrationForm").addEventListener("submit", function(
         return;
     }
 
-    let newEntry = { name, email, dob, termsAccepted };
+    let newEntry = { name, email, password, dob, termsAccepted };
     let entries = JSON.parse(localStorage.getItem("entries")) || [];
     entries.push(newEntry);
     localStorage.setItem("entries", JSON.stringify(entries));
