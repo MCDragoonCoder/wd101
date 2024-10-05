@@ -1,8 +1,13 @@
+document.addEventListener("DOMContentLoaded", function () {
+    loadEntriesFromStorage();
+});
+
 document.getElementById("registrationForm").addEventListener("submit", function(event){
     event.preventDefault();
     
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
     let dob = document.getElementById("dob").value;
     let termsAccepted = document.getElementById("terms").checked;
 
@@ -25,17 +30,35 @@ document.getElementById("registrationForm").addEventListener("submit", function(
         alert("Check this box");
         return;
     }
+
+    let newEntry = { name, email, dob, termsAccepted };
+    let entries = JSON.parse(localStorage.getItem("entries")) || [];
+    entries.push(newEntry);
+    localStorage.setItem("entries", JSON.stringify(entries));
+    addEntryToTable(newEntry);
     document.getElementById("registrationForm").reset();
 
-    let tableBody = document.getElementById("entries");
-    let newRow = document.createElement("tr");
+    function addEntryToTable(entry) {
+        let tableBody = document.getElementById("entriesTableBody");
+        let newRow = document.createElement("tr");
     
-    newRow.innerHTML = `
-      <td>${name}</td>
-      <td>${email}</td>
-      <td>${dob}</td>
-      <td>${termsAccepted ? "true" : "false"}</td>
-    `;
+        newRow.innerHTML = `
+          <td>${entry.name}</td>
+          <td>${entry.email}</td>
+          <td>${entry.password}</td>
+          <td>${entry.dob}</td>
+          <td>${entry.termsAccepted ? "true" : "false"}</td>
+        `;
+    
+        tableBody.appendChild(newRow);
+    }
 
-    tableBody.appendChild(newRow);
+    function loadEntriesFromStorage() {
+        let entries = JSON.parse(localStorage.getItem("entries")) || [];
+        
+        entries.forEach(entry => {
+            addEntryToTable(entry);
+        });
+    }
+    
 });
