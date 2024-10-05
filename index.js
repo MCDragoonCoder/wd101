@@ -20,12 +20,10 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     if (monthDiff<0 || (monthDiff==0 && dayDiff<0)) {
         age--;
     }
-
     if (age<18 || age>55) {
         alert("Your age must be between 18 and 55 to register.");
         return;
     }
-    
     if(!termsAccepted) {
         alert("Check this box");
         return;
@@ -35,30 +33,26 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     let entries = JSON.parse(localStorage.getItem("entries")) || [];
     entries.push(newEntry);
     localStorage.setItem("entries", JSON.stringify(entries));
-    addEntryToTable(newEntry);
     document.getElementById("registrationForm").reset();
-
-    function addEntryToTable(entry) {
-        let tableBody = document.getElementById("entriesTableBody");
-        let newRow = document.createElement("tr");
-    
-        newRow.innerHTML = `
-          <td>${entry.name}</td>
-          <td>${entry.email}</td>
-          <td>${entry.password}</td>
-          <td>${entry.dob}</td>
-          <td>${entry.termsAccepted ? "true" : "false"}</td>
-        `;
-    
-        tableBody.appendChild(newRow);
-    }
-
-    function loadEntriesFromStorage() {
-        let entries = JSON.parse(localStorage.getItem("entries")) || [];
-        
-        entries.forEach(entry => {
-            addEntryToTable(entry);
-        });
-    }
-    
+    addEntryToTable(newEntry);
 });
+
+function addEntryToTable(entry) {
+    let tableBody = document.getElementById("entriesTableBody");
+    let newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>${entry.name}</td>
+      <td>${entry.email}</td>
+      <td>${entry.password}</td>
+      <td>${entry.dob}</td>
+      <td>${entry.termsAccepted ? "true" : "false"}</td>
+    `;
+    tableBody.appendChild(newRow);
+}
+
+function loadEntriesFromStorage() {
+    let entries = JSON.parse(localStorage.getItem("entries")) || [];    
+    entries.forEach(entry => {
+        addEntryToTable(entry);
+    });
+}
