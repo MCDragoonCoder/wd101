@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Registration Form</h2>
+      <form id="registrationForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter full name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required />
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="terms" name="terms" required /> Accept
+            T&C
+          </label>
+        </div>
+        <div class="form-group">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="form-container">
+      <h2>Entries</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">dob</th>
+            <th scope="col">accepted terms?</th>
+          </tr>
+        </thead>
+        <tbody id="entries">
+            
+        </tbody>
+      </table>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
